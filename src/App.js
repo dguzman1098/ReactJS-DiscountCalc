@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import KeyPadComponent from './Components/KeyPadComponent';
 import PriceComponent from './Components/PriceComponent';
+import DiscountComponent from './Components/DiscountComponent';
 
 class App extends Component {
   constructor() {
@@ -82,6 +83,7 @@ class App extends Component {
         <h1 className="header">CALCULATE A DISCOUNT</h1>
 
         <div className="content-body">
+
           <div className="price-body">
             <p className="title">Enter A Price</p>
             <PriceComponent price={this.state.price} />
@@ -90,7 +92,7 @@ class App extends Component {
 
           <div className="discount-body">
             <p className="title">Enter A Discount</p>
-            <PriceComponent discount={this.state.discount} />
+            <DiscountComponent discount={this.state.discount} />
             <KeyPadComponent onClick={this.onClickDiscount} />
           </div>
         </div>
@@ -99,8 +101,9 @@ class App extends Component {
           <button className="discount-button" onClick={this.calculateDiscount}>
             Calculate Discount
           </button>
-          <p style={{margin: "25px"}}>${this.state.price} * {this.state.discount}%</p>
-          <p className="total-price"> = ${this.state.total} OFF</p>
+          <p style={{margin: "25px"}}>Price : ${this.state.price}</p>
+          <p style={{margin: "25px"}}>Discount: {this.state.discount}%</p>
+          <p className="total-price"> Amount Discounted ${this.state.total}</p>
         </div>
       </div>
 
