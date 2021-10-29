@@ -1,77 +1,109 @@
 import React, { Component } from 'react';
 import './App.css';
 import KeyPadComponent from './Components/KeyPadComponent';
-import ResultComponent from './Components/ResultComponent';
+import PriceComponent from './Components/PriceComponent';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      result: ''
+      price: '',
+      discount: '',
+      total: '',
+      finalPrice: ''
     }
   }
 
-  onClick = (button) => {
-    console.log(this.state.result + button);
-    if (button === '=') {
-      this.calculate(
-        )
-    }
-    else if (button === 'C') {
-      this.reset();
+  onClickPrice = (button) => {
+    //console.log(this.state.price + button);
+    if (button === 'C') {
+      this.resetPrice();
     }
     else if (button === 'CE') {
-      this.backspace();
+      this.priceKeypadBackspace();
     }
     else {
       this.setState({
-        result: this.state.result + button
+        price: this.state.price + button
       })
     }
   }
 
-  calculate = () => {
-    var checkResult = "";
-    if (this.state.result.includes("---")) {
-      checkResult = this.state.result.replace("--", "+")
+  onClickDiscount = (button) => {
+    //console.log(this.state.discount + button);
+    if (button === 'C') {
+      this.resetDiscount();
     }
-
+    else if (button === 'CE') {
+      this.discountKeypadBackspace();
+    }
     else {
-      checkResult = this.state.result;
-    }
-
-    try {
       this.setState({
-        result: (eval(checkResult) || '') +''
-      })
-    } catch (e) {
-      this.setState({
-        result: "Error"
+        discount: this.state.discount + button
       })
     }
   }
 
-  reset = () => {
+
+  resetPrice = () => {
     this.setState({
-      result: ''
+      price: ''
     });
   }
 
-  backspace = () => {
+  resetDiscount = () => {
     this.setState({
-      result: this.state.result.slice(0, -1)
+      discount: ''
     });
+  }
+
+  priceKeypadBackspace = () => {
+    this.setState({
+      price: this.state.price.slice(0, -1)
+    });
+  }
+
+  discountKeypadBackspace = () => {
+    this.setState({
+      discount: this.state.discount.slice(0, -1)
+    });
+  }
+
+  calculateDiscount = () => {
+    this.setState({
+      total: this.state.price * (this.state.discount / 100)
+    })
   }
 
   render() {
     return (
-      <div>
-        <div className="calc-body">
-        <h1>Calc</h1>
-          <ResultComponent result={this.state.result}/>
-          <KeyPadComponent onClick={this.onClick}/>
+
+      <div className="container">
+        <h1 className="header">CALCULATE A DISCOUNT</h1>
+
+        <div className="content-body">
+          <div className="price-body">
+            <p className="title">Enter A Price</p>
+            <PriceComponent price={this.state.price} />
+            <KeyPadComponent onClick={this.onClickPrice} />
+          </div>
+
+          <div className="discount-body">
+            <p className="title">Enter A Discount</p>
+            <PriceComponent discount={this.state.discount} />
+            <KeyPadComponent onClick={this.onClickDiscount} />
+          </div>
+        </div>
+
+        <div className="total-box">
+          <button className="discount-button" onClick={this.calculateDiscount}>
+            Calculate Discount
+          </button>
+          <p style={{margin: "25px"}}>${this.state.price} * {this.state.discount}%</p>
+          <p className="total-price"> = ${this.state.total} OFF</p>
         </div>
       </div>
+
     );
   }
 }

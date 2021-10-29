@@ -1,26 +1,80 @@
-.result {
+* {
+  margin: auto;
+  padding: auto;
+}
+
+.container {
+  background-color: rgb(90, 88, 241);
+  height: 100vh;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.title {
+  
+  font-size: 22px;
+  font-weight: bolder;
+  text-align: center;
+  color: rgb(0, 0, 0);
+}
+
+.price {
   height: 60px;
   background-color: #bbb;
   width: 100%;
 }
 
-.result p {
+.price p {
   font-size: 40px;
-  margin: 5px;
+  margin: 2px;
 }
 
-.calc-body {
-  max-width: 400px;
-  margin: auto;
+.content-body {
+  max-width: 100%;
+  margin: 0 25% 5% 25%;
+  display: flex;
+  flex-direction: row;
+  
 }
 
-.button {
+.price-body {
+  margin: 15px;
+  flex: 50%;
+}
+
+.discount-body {
+  margin: 15px;
+  flex: 50%;
+  
+}
+
+.discount-button {
+  width: 100%;
+  background-color: green;
+}
+
+.keypad-buttons {
   display: block;
   background-color: #bbb;
 }
 
 button  {
-  width: 25%;
+  width: 33.3%;
   height: 60px;
   font-size: 30px;
+}
+
+.total-box {
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+  width: 350px;
+  
+}
+
+.total-price {
+  font-size: 40px;
 }
